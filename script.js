@@ -22,8 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
         cookieStatus.textContent = "Предсказание успешно расшифровано! 🍪";
     }
 
-    cookieDisplay.addEventListener('click', showRandomFortune);
-    newFortuneBtn.addEventListener('click', showRandomFortune);
+    if (cookieDisplay) {
+        cookieDisplay.addEventListener('click', showRandomFortune);
+    }
+    if (newFortuneBtn) {
+        newFortuneBtn.addEventListener('click', showRandomFortune);
+    }
 
     // --- 2. ЛОГИКА КОРЗИНЫ И МОДАЛЬНОГО МЕНЮ ---
     const menuModal = document.getElementById('menuModal');
@@ -56,20 +60,24 @@ document.addEventListener('DOMContentLoaded', () => {
     let cart = [];
 
     function openMenu() {
-        menuModal.classList.remove('hidden');
-        renderModalMenu();
-        updateCartUI();
+        if (menuModal) {
+            menuModal.classList.remove('hidden');
+            renderModalMenu();
+            updateCartUI();
+        }
     }
 
     function closeModal() {
-        menuModal.classList.add('hidden');
-        orderFormBlock.classList.add('hidden');
-        orderActionsBlock.classList.remove('hidden');
+        if (menuModal) {
+            menuModal.classList.add('hidden');
+            if (orderFormBlock) orderFormBlock.classList.add('hidden');
+            if (orderActionsBlock) orderActionsBlock.classList.remove('hidden');
+        }
     }
 
-    openMenuBtn.addEventListener('click', openMenu);
-    heroMenuBtn.addEventListener('click', openMenu);
-    closeModalBtn.addEventListener('click', closeModal);
+    if (openMenuBtn) openMenuBtn.addEventListener('click', openMenu);
+    if (heroMenuBtn) heroMenuBtn.addEventListener('click', openMenu);
+    if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
 
     document.querySelectorAll('.add-to-cart').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -81,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function renderModalMenu() {
+        if (!modalItemsList) return;
         modalItemsList.innerHTML = '<h3>// ПОЛНЫЙ КАТАЛОГ</h3>';
         fullMenu.forEach(item => {
             const row = document.createElement('div');
@@ -112,6 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateCartUI() {
+        if (!cartItemsContainer || !cartTotal || !checkoutBtn) return;
+
         if (cart.length === 0) {
             cartItemsContainer.innerHTML = 'Заказ пуст. Выберите позиции из меню.';
             cartItemsContainer.className = 'cart-items-empty';
@@ -144,38 +155,80 @@ document.addEventListener('DOMContentLoaded', () => {
     window.removeItem = function(index) {
         cart.splice(index, 1);
         updateCartUI();
+    };
+
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', () => {
+            if (orderActionsBlock) orderActionsBlock.classList.add('hidden');
+            if (orderFormBlock) orderFormBlock.classList.remove('hidden');
+        });
     }
 
-    checkoutBtn.addEventListener('click', () => {
-        orderActionsBlock.classList.add('hidden');
-        orderFormBlock.classList.remove('hidden');
-    });
+    // --- 3. ОТПРАВКА ЗАКАЗА НА CLOUDFLARE PAGES FUNCTION ---
+    if (submitOrderBtn) {
+        submitOrderBtn.addEventListener('click', () => {
+            const name = clientName ? clientName.value.trim() : '';
+            const phone = clientPhone ? clientPhone.value.trim() : '';
 
-    submitOrderBtn.addEventListener('click', () => {
-        const name = clientName.value.trim();
-        const phone = clientPhone.value.trim();
+            if (!name) {
+                alert('Пожалуйста, введите ваше имя!');
+                return;
+            }
+            if (!phone || phone.length < 6) {
+                alert('Пожалуйста, введите корректный номер телефона!');
+                return;
+            }
 
-        if (!name) {
-            alert('Пожалуйста, введите ваше имя!');
-            return;
-        }
-        if (!phone || phone.length < 6) {
-            alert('Пожалуйста, введите корректный номер телефона!');
-            return;
-        }
+            let total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
 
-        // Данные для Telegram-бота
-        console.log('Заказ отправлен в Telegram:', { client: name, phone, cart });
+            const orderData = {
+                name: name,
+                phone: phone,
+                cart: cart,
+                total: total
+            };
 
-        closeModal();
-        successMessageText.textContent = `Спасибо, ${name}! Заказ передан в Telegram-бот кофейни.`;
-        clientName.value = '';
-        clientPhone.value = '';
-        cart = [];
-        successModal.classList.remove('hidden');
-    });
+            submitOrderBtn.textContent = 'ОТПРАВКА...';
+            submitOrderBtn.disabled = true;
 
-    closeSuccessBtn.addEventListener('click', () => {
-        successModal.classList.add('hidden');
-    });
+            // Запрос на встроенную функцию Cloudflare Pages (/order)
+            fetch('/order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(orderData)
+            })
+            .then(response => response.json())
+            .then(result => {
+                submitOrderBtn.textContent = 'ПОДТВЕРДИТЬ ЗАКАЗ';
+                submitOrderBtn.disabled = false;
+
+                if (result.success) {
+                    closeModal();
+                    if (successMessageText) {
+                        successMessageText.textContent = `Спасибо, ${name}! Заказ успешно отправлен в Telegram-бот кофейни.`;
+                    }
+                    if (clientName) clientName.value = '';
+                    if (clientPhone) clientPhone.value = '';
+                    cart = [];
+                    if (successModal) successModal.classList.remove('hidden');
+                } else {
+                    alert('Ошибка при отправке заказа: ' + (result.error || 'попробуйте еще раз.'));
+                }
+            })
+            .catch(error => {
+                submitOrderBtn.textContent = 'ПОДТВЕРДИТЬ ЗАКАЗ';
+                submitOrderBtn.disabled = false;
+                console.error('Error:', error);
+                alert('Сетевая ошибка. Проверьте соединение.');
+            });
+        });
+    }
+
+    if (closeSuccessBtn) {
+        closeSuccessBtn.addEventListener('click', () => {
+            if (successModal) successModal.classList.add('hidden');
+        });
+    }
 });
