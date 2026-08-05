@@ -17,9 +17,42 @@
 body {
     background-color: var(--bg-dark);
     color: var(--text-color);
-    font-family: var(--font-pixel);
+    font-family: var(--font-pixel); /* Снова пиксельный шрифт везде */
     padding: 15px;
-    line-height: 1.5;
+    line-height: 1.8; /* Увеличиваем межстрочный интервал для читаемости пикселей */
+}
+
+/* 2. Жестко возвращаем пиксельный шрифт только туда, где он нужен (заголовки, кнопки, логотипы) */
+.terminal-header,
+.window-title,
+.menu-trigger-btn,
+.main-title,
+.badge,
+.retro-btn,
+.section-title,
+.card h3,
+.price,
+.reward-title,
+.promo-code,
+.fortune-title,
+.modal-header,
+.retro-input {
+    font-family: var(--font-pixel);
+}
+
+.card p,
+.product-desc,
+.subtitle,
+.recipe-status,
+.fortune-text,
+.review-text,
+.form-prompt,
+.payment-instruction,
+.alert-desc {
+    font-family: var(--font-pixel);
+    font-size: 11px; /* Оптимальный размер: уже не крошечный 8px, но всё еще пиксельный */
+    color: #ffffff;    /* Чистый белый цвет вместо тускло-серого дает идеальную читаемость */
+    line-height: 1.8;
 }
 
 .terminal-container {
@@ -67,7 +100,7 @@ body {
     color: #000;
     border: none;
     padding: 6px 12px;
-    font-size: 9px;
+    font-size: 10px;
     cursor: pointer;
     font-weight: bold;
     border-radius: 4px;
@@ -185,7 +218,7 @@ body {
 .cookie-display:active { transform: scale(0.95); }
 
 .recipe-status {
-    font-size: 8px;
+    font-size: 9px;
     color: #888;
     margin-top: 10px;
 }
@@ -206,7 +239,7 @@ body {
 }
 
 .fortune-text {
-    font-size: 8px;
+    font-size: 9px;
     color: #ddd;
     line-height: 1.6;
 }
@@ -256,12 +289,7 @@ body {
 .card h3 {
     font-size: 11px;
     color: var(--accent-green);
-    margin-bottom: 10px;
-}
-.card p {
-    font-size: 9px;
-    color: #aaa;
-    line-height: 1.6;
+    margin-bottom: 12px;
 }
 
 .product-card {
@@ -269,8 +297,9 @@ body {
     flex-direction: column;
     justify-content: space-between;
 }
+
 .product-icon { font-size: 28px; margin-bottom: 10px; }
-.product-desc { font-size: 8px; margin: 10px 0; color: #bbb; }
+.product-desc { font-size: 13px; margin: 10px 0; color: #ccc; }
 .product-footer {
     display: flex;
     justify-content: space-between;
@@ -353,9 +382,11 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
+    padding: 12px 0;
     border-bottom: 1px dashed #333;
-    font-size: 9px;
+    font-family: var(--font-pixel);
+    font-size: 10px; /* Увеличили с 9px до 10px */
+    color: #ffffff;   /* Сделали белым для идеальной читаемости */
 }
 
 .cart-summary {
@@ -364,19 +395,34 @@ body {
     padding-top: 15px;
 }
 
-.cart-summary h3 { font-size: 10px; color: var(--accent-yellow); margin-bottom: 10px; }
-.cart-items-empty { font-size: 8px; color: #777; margin-bottom: 10px; }
+.cart-summary h3 {
+    font-family: var(--font-pixel);
+    font-size: 11px;
+    color: var(--accent-yellow);
+    margin-bottom: 12px;
+}
+
+.cart-items-empty,
+.form-prompt {
+    font-family: var(--font-pixel);
+    font-size: 9px;
+    color: #cccccc;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
 
 .cart-item-row {
     display: flex;
     justify-content: space-between;
-    font-size: 8px;
-    margin-bottom: 6px;
-    color: #ddd;
+    font-family: var(--font-pixel);
+    font-size: 10px; /* Увеличили с 8px до 10px */
+    margin-bottom: 8px;
+    color: #ffffff;   /* Белый цвет текста */
 }
 
 .cart-total {
-    font-size: 11px;
+    font-family: var(--font-pixel);
+    font-size: 12px; /* Чуть крупнее для акцента */
     color: var(--accent-green);
     margin: 15px 0;
     text-align: right;
@@ -385,7 +431,7 @@ body {
 .order-form {
     margin-top: 15px;
 }
-.form-prompt { font-size: 8px; margin-bottom: 6px; color: #ccc; }
+
 .retro-input {
     font-family: var(--font-pixel);
     background: #000;

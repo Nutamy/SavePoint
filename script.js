@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fullMenu = [
         { name: 'Фильтр-кофе', price: 1200, icon: '☕' },
         { name: 'Лавандовый Раф', price: 1800, icon: '🥛' },
-        { name: 'Миндальный Круассан', price: 1400, icon: '🥐' },
+        { name: 'Круассан', price: 1400, icon: '🥐' },
         { name: 'Эспрессо Классик', price: 900, icon: '☕' },
         { name: 'Капучино Double', price: 1500, icon: '☕' },
         { name: 'Чизкейк Нью-Йорк', price: 1600, icon: '🍰' }
