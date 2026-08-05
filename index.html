@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save Point | Кофейня в Алматы</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Ретро-шрифт Pixel -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="terminal-container">
+        <!-- Шапка окна -->
+        <header class="terminal-header">
+            <div class="window-buttons">
+                <span class="btn-dot red"></span>
+                <span class="btn-dot yellow"></span>
+                <span class="btn-dot green"></span>
+            </div>
+            <div class="window-title">SAVE_POINT_ALMATY.EXE</div>
+            <button class="menu-trigger-btn" id="openMenuBtn">📁 ОТКРЫТЬ МЕНЮ</button>
+        </header>
+
+        <!-- Главный экран (Hero Section) -->
+        <section class="hero-section">
+            <div class="hero-info">
+                <span class="badge">[ checkpoint loaded ]</span>
+                <h1 class="main-title">SAVE POINT</h1>
+                <p class="subtitle">Твоя точка восстановления энергии в сердце Алматы. Открой пиксельное печенье с предсказанием или сразу выбирай из инвентаря!</p>
+                <div class="hero-actions">
+                    <button class="retro-btn primary" id="heroMenuBtn">СМОТРЕТЬ МЕНЮ</button>
+                    <a href="#about" class="btn-skip">О нас ↓</a>
+                </div>
+            </div>
+
+            <!-- Зона интерактива: Печенье с предсказаниями -->
+            <div class="game-box">
+                <div class="pixel-canvas">
+                    <div class="cookie-display" id="cookieDisplay">🥠</div>
+                    <div class="recipe-status" id="cookieStatus">Кликни на печенье, чтобы узнать предсказание на сегодня!</div>
+                </div>
+
+                <!-- Карточка предсказания (появляется при клике) -->
+                <div class="fortune-card hidden" id="fortuneCard">
+                    <p class="fortune-title">✨ Твое предсказание:</p>
+                    <p class="fortune-text" id="fortuneText">«Сегодня идеальный день для чашки фильтр-кофе и великих свершений в Алматы.»</p>
+                </div>
+
+                <div class="controls-panel">
+                    <button class="retro-btn small-btn" id="newFortuneBtn">🔮 Другое предсказание</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Блок: Атмосфера и Ценности -->
+        <section class="section" id="about">
+            <h2 class="section-title">// АТМОСФЕРА И ЦЕННОСТИ</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>☕ Свежая обжарка</h3>
+                    <p>Используем только отборное зерно спешелти качества, обжаренное специально для наших гостей в Алматы.</p>
+                </div>
+                <div class="card">
+                    <h3>🛋 Уютный интерьер</h3>
+                    <p>Атмосфера старых добрых видеоигр, мягкие диваны, розетки у каждого столика и стабильный Wi-Fi.</p>
+                </div>
+                <div class="card">
+                    <h3>🐾 Pet-friendly</h3>
+                    <p>Мы любим животных! Приходите со своими питомцами — для них всегда найдется миска со свежей водой.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Блок: Хиты продаж -->
+        <section class="section">
+            <h2 class="section-title">// ХИТЫ ПРОДАЖ</h2>
+            <div class="grid-3">
+                <div class="card product-card">
+                    <div class="product-icon">☕</div>
+                    <h3>Фильтр-кофе</h3>
+                    <p class="product-desc">Классика чистейшего вкуса свежего зерна.</p>
+                    <div class="product-footer">
+                        <span class="price">1200 ₸</span>
+                        <button class="retro-btn small-btn add-to-cart" data-name="Фильтр-кофе" data-price="1200">+ В заказ</button>
+                    </div>
+                </div>
+                <div class="card product-card">
+                    <div class="product-icon">🥛</div>
+                    <h3>Лавандовый Раф</h3>
+                    <p class="product-desc">Фирменный мягкий напиток с натуральным лавандовым сиропом.</p>
+                    <div class="product-footer">
+                        <span class="price">1800 ₸</span>
+                        <button class="retro-btn small-btn add-to-cart" data-name="Лавандовый Раф" data-price="1800">+ В заказ</button>
+                    </div>
+                </div>
+                <div class="card product-card">
+                    <div class="product-icon">🥐</div>
+                    <h3>Миндальный Круассан</h3>
+                    <p class="product-desc">Свежая хрустящая выпечка с миндальным кремом.</p>
+                    <div class="product-footer">
+                        <span class="price">1400 ₸</span>
+                        <button class="retro-btn small-btn add-to-cart" data-name="Миндальный Круассан" data-price="1400">+ В заказ</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Блок: Преимущества -->
+        <section class="section">
+            <h2 class="section-title">// ХАРАКТЕРИСТИКИ ЛОКАЦИИ</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>⚡ Быстрый сервис</h3>
+                    <p>Предзаказ через сайт избавляет от очередей в часы пик.</p>
+                </div>
+                <div class="card">
+                    <h3>📶 Turbo Wi-Fi</h3>
+                    <p>Идеальное место для удаленной работы и учебы.</p>
+                </div>
+                <div class="card">
+                    <h3>🚗 Парковка</h3>
+                    <p>Удобные парковочные места рядом с кофейней.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Блок: Отзывы -->
+        <section class="section">
+            <h2 class="section-title">// ОТЗЫВЫ ГОСТЕЙ (2GIS / GOOGLE)</h2>
+            <div class="grid-2">
+                <div class="card review-card">
+                    <p class="review-text">«Лучший фильтр в городе! Атмосфера просто пушка, обожаю этот ретро-вайб, часто сижу здесь с ноутбуком.»</p>
+                    <p class="review-author">— Дамир К. (Google Отзывы)</p>
+                </div>
+                <div class="card review-card">
+                    <p class="review-text">«Очень уютное место. Раф с лавандой невероятный, а предсказания в печеньках поднимают настроение на весь день!»</p>
+                    <p class="review-author">— Алия М. (2GIS)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Блок: Контакты и Карта -->
+        <section class="section" id="contacts">
+            <h2 class="section-title">// КОНТАКТЫ & КАРТА</h2>
+            <div class="contacts-grid">
+                <div class="card">
+                    <h3>📍 Адрес в Алматы</h3>
+                    <p>ул. Панфилова, 92 (уг. ул. Богенбай батыра)</p>
+                    <br>
+                    <h3>🕒 Режим работы</h3>
+                    <p>Пн-Пт: 08:00 – 22:00</p>
+                    <p>Сб-Вс: 09:00 – 23:00</p>
+                </div>
+                <div class="map-container">
+                    <div class="retro-map">
+                        <span>[ MAP_MODULE: ALMATY_CENTER ]</span>
+                        <p>📍 Save Point Point Active</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО МЕНЮ И КОРЗИНЫ -->
+    <div class="modal-overlay hidden" id="menuModal">
+        <div class="modal-terminal">
+            <div class="modal-header">
+                <span>INVENTORY_MENU.DAT</span>
+                <button class="close-modal" id="closeModalBtn">[X]</button>
+            </div>
+            <div class="modal-body">
+                <div class="menu-items-list" id="modalItemsList">
+                    <!-- Заполняется JS -->
+                </div>
+                
+                <div class="cart-summary">
+                    <h3>Корзина заказа:</h3>
+                    <div id="cartItemsContainer" class="cart-items-empty">Заказ пуст. Выберите позиции из меню.</div>
+                    <div class="cart-total" id="cartTotal">Итого: 0 ₸</div>
+
+                    <!-- Форма заказа (Имя + Телефон) -->
+                    <div class="order-form hidden" id="orderFormBlock">
+                        <p class="form-prompt">Ваше имя:</p>
+                        <input type="text" id="clientName" placeholder="например, Айсулу" class="retro-input">
+                        <p class="form-prompt">Номер телефона:</p>
+                        <input type="tel" id="clientPhone" placeholder="+7 (777) 000-00-00" class="retro-input">
+                        <button class="retro-btn primary full-width" id="submitOrderBtn">ПОДТВЕРДИТЬ ЗАКАЗ</button>
+                    </div>
+
+                    <div class="order-actions" id="orderActionsBlock">
+                        <button class="retro-btn primary full-width hidden" id="checkoutBtn">ОФОРМИТЬ ПРЕДЗАКАЗ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- УВЕДОМЛЕНИЕ ОБ ОПЛАТЕ И СЧЕТЕ -->
+    <div class="modal-overlay hidden" id="successModal">
+        <div class="modal-terminal alert-terminal">
+            <div class="modal-header">
+                <span>TRANSACTION_STATUS.LOG</span>
+            </div>
+            <div class="modal-body text-center">
+                <div class="success-icon">✔️</div>
+                <h3>ЗАКАЗ СФОРМИРОВАН!</h3>
+                <p class="alert-desc" id="successMessageText">Данные переданы в Telegram-бот кофейни.</p>
+                <p class="payment-instruction">На указанный номер будет выставлен счёт. После успешной оплаты вам придет <b>номер заказа</b>, и бариста сразу приступит к приготовлению!</p>
+                <button class="retro-btn primary" id="closeSuccessBtn">ПОНЯТНО</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
