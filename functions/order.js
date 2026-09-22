@@ -94,8 +94,10 @@ async function handleBooking(context, data) {
   const trimmedTable = String(table || "").trim().slice(0, 10);
   const trimmedTableZone = String(tableZone || "").trim().slice(0, 40);
   const seatsNum = parseInt(tableSeats, 10);
+  // Same MarkdownV2 escaping rule applies here: the literal "(" / ")" wrapping the
+  // zone/seats detail must be escaped or Telegram rejects the whole message.
   const tableLine = trimmedTable
-    ? `🪑 *Стол:* ${escapeMdV2(trimmedTable)}${trimmedTableZone ? ` (${escapeMdV2(trimmedTableZone)}${Number.isFinite(seatsNum) && seatsNum > 0 ? ", " + escapeMdV2(String(seatsNum)) + " мест" : ""})` : ""}\n`
+    ? `🪑 *Стол:* ${escapeMdV2(trimmedTable)}${trimmedTableZone ? ` \\(${escapeMdV2(trimmedTableZone)}${Number.isFinite(seatsNum) && seatsNum > 0 ? ", " + escapeMdV2(String(seatsNum)) + " мест" : ""}\\)` : ""}\n`
     : "";
 
   const message =
@@ -211,7 +213,10 @@ export async function onRequestPost(context) {
           const label = escapeMdV2(String(a.label || "").slice(0, 40));
           const price = Math.max(-2000, Math.min(5000, parseInt(a.price, 10) || 0));
           safeTotal += price;
-          return `➕ ${label} (${price > 0 ? "\\+" : "\\-"}${escapeMdV2(String(Math.abs(price)))} ₸)`;
+          // Literal "(" / ")" are MarkdownV2 special chars too and must be escaped,
+          // same as everywhere else in this message — unescaped parens here made
+          // Telegram reject the whole request whenever an order had any add-on.
+          return `➕ ${label} \\(${price > 0 ? "\\+" : "\\-"}${escapeMdV2(String(Math.abs(price)))} ₸\\)`;
         })
         .join("\n") + "\n";
     }
