@@ -254,9 +254,8 @@ body {
 }
 
 .cookie-display {
-    width: 56px;
-    height: 56px;
-    color: var(--accent-yellow);
+    font-size: 44px;
+    line-height: 1;
     cursor: pointer;
     user-select: none;
     transition: transform 0.2s;
