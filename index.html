@@ -461,11 +461,17 @@
                 <div class="accordion-list" id="menuCategories">
                     <!-- Populated by JS from MENU_CATEGORIES -->
                 </div>
-                <p class="menu-addons-note"><strong>Дополнительно:</strong> альтернативное молоко (овсяное, миндальное) +300 ₸ · доп. шот +300 ₸ · сироп +200 ₸ · скидка −100 ₸ за свою кружку — укажи в комментарии к заказу.</p>
-
                 <div class="cart-summary">
                     <h3>Корзина заказа:</h3>
                     <div id="cartItemsContainer" class="cart-items-empty">Заказ пуст. Выберите позиции из меню.</div>
+
+                    <div class="cart-addons hidden" id="cartAddons">
+                        <p class="cart-addons-label">Дополнительно к заказу (нажми, чтобы добавить):</p>
+                        <div class="addon-chips" id="addonChips">
+                            <!-- Populated by JS from ADDONS -->
+                        </div>
+                    </div>
+
                     <div class="cart-total" id="cartTotal">Итого: 0 ₸</div>
 
                     <!-- Order form (name + phone) -->
@@ -475,7 +481,7 @@
                         <label class="form-prompt" for="clientPhone">Номер телефона:</label>
                         <input type="tel" id="clientPhone" placeholder="+7 (777) 000-00-00" class="retro-input" maxlength="20" autocomplete="tel">
                         <label class="form-prompt" for="clientComment">Комментарий к заказу (опционально):</label>
-                        <input type="text" id="clientComment" placeholder="например: овсяное молоко, своя кружка" class="retro-input" maxlength="140">
+                        <input type="text" id="clientComment" placeholder="например: без сахара, погорячее" class="retro-input" maxlength="140">
 
                         <!-- Honeypot: hidden from humans, but bots that auto-fill every field will fill it in -->
                         <div class="hp-field" aria-hidden="true">

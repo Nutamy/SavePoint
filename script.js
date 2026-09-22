@@ -329,6 +329,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const menuCategoriesEl = document.getElementById('menuCategories');
     const cartItemsContainer = document.getElementById('cartItemsContainer');
+    const cartAddons = document.getElementById('cartAddons');
+    const addonChipsEl = document.getElementById('addonChips');
     const cartTotal = document.getElementById('cartTotal');
     const checkoutBtn = document.getElementById('checkoutBtn');
     const orderFormBlock = document.getElementById('orderFormBlock');
@@ -430,8 +432,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
+    // Order-level modifiers (not tied to a specific cart line — the barista confirms which
+    // drink they apply to from the comment/context, same as any small-cafe order today).
+    const ADDONS = [
+        { id: 'altMilk', label: 'Альтернативное молоко', price: 300 },
+        { id: 'extraShot', label: 'Доп. шот', price: 300 },
+        { id: 'syrup', label: 'Сироп', price: 200 },
+        { id: 'ownCup', label: 'Своя кружка', price: -100 }
+    ];
+
     let cart = [];
+    const selectedAddons = new Set();
     let lastFocusedEl = null;
+
+    function formatAddonPrice(price) {
+        return `${price > 0 ? '+' : '−'}${Math.abs(price)} ₸`;
+    }
+
+    function computeCartTotal() {
+        const itemsTotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+        const addonsTotal = ADDONS.filter((a) => selectedAddons.has(a.id)).reduce((sum, a) => sum + a.price, 0);
+        return { itemsTotal, addonsTotal, total: itemsTotal + addonsTotal };
+    }
 
     function trapFocus(e) {
         const openOverlay = document.querySelector('.modal-overlay.is-open');
@@ -547,6 +569,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     renderMenuCategories();
+
+    // ================= 2a-2. Add-on chips (alt milk, extra shot, syrup, own cup) =================
+    function renderAddonChips() {
+        if (!addonChipsEl) return;
+        addonChipsEl.innerHTML = ADDONS.map((a) => `
+            <button type="button" class="addon-chip" data-addon="${a.id}" aria-pressed="${selectedAddons.has(a.id)}">
+                ${a.label} <span class="addon-chip-price">${formatAddonPrice(a.price)}</span>
+            </button>
+        `).join('');
+        addonChipsEl.querySelectorAll('.addon-chip').forEach((chip) => {
+            chip.addEventListener('click', () => {
+                const id = chip.getAttribute('data-addon');
+                if (selectedAddons.has(id)) selectedAddons.delete(id);
+                else selectedAddons.add(id);
+                updateCartUI();
+            });
+        });
+    }
+    renderAddonChips();
 
     // ================= 2b. Booking modal =================
     const bookingDate = document.getElementById('bookingDate');
@@ -765,6 +806,18 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateCartUI() {
         if (!cartItemsContainer || !cartTotal || !checkoutBtn) return;
 
+        // Add-on chips only make sense once there's at least one drink/item to attach
+        // them to, and a cleared cart shouldn't leave stale modifiers selected. Clear
+        // BEFORE syncing the chip DOM below, so the sync reflects the reset state.
+        if (cart.length === 0) selectedAddons.clear();
+
+        if (cartAddons) cartAddons.classList.toggle('hidden', cart.length === 0);
+        if (addonChipsEl) {
+            addonChipsEl.querySelectorAll('.addon-chip').forEach((chip) => {
+                chip.setAttribute('aria-pressed', String(selectedAddons.has(chip.getAttribute('data-addon'))));
+            });
+        }
+
         if (cart.length === 0) {
             cartItemsContainer.innerHTML = 'Заказ пуст. Выберите позиции из меню.';
             cartItemsContainer.className = 'cart-items-empty';
@@ -775,11 +828,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cartItemsContainer.className = '';
         cartItemsContainer.innerHTML = '';
-        let total = 0;
 
         cart.forEach((item, index) => {
             const itemTotal = item.price * item.qty;
-            total += itemTotal;
 
             const div = document.createElement('div');
             div.className = 'cart-item-row';
@@ -790,7 +841,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cartItemsContainer.appendChild(div);
         });
 
-        cartTotal.textContent = `Итого: ${total} ₸`;
+        cartTotal.textContent = `Итого: ${computeCartTotal().total} ₸`;
         checkoutBtn.classList.remove('hidden');
     }
 
@@ -846,8 +897,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-            const orderData = { name, phone, comment, cart, total, website };
+            const { total } = computeCartTotal();
+            const addons = ADDONS.filter((a) => selectedAddons.has(a.id)).map((a) => ({ label: a.label, price: a.price }));
+            const orderData = { name, phone, comment, cart, addons, total, website };
 
             submitOrderBtn.textContent = 'ОТПРАВКА...';
             submitOrderBtn.disabled = true;
@@ -876,6 +928,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (clientComment) clientComment.value = '';
                         if (consentCheckbox) consentCheckbox.checked = false;
                         cart = [];
+                        selectedAddons.clear();
                         if (successModal) openOverlay(successModal, closeSuccessBtn);
                     } else {
                         showFormError('Ошибка при отправке заказа: ' + (result.error || 'попробуйте еще раз.'));

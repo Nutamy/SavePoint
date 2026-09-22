@@ -134,7 +134,7 @@ export async function onRequestPost(context) {
       return handleBooking(context, data);
     }
 
-    const { name, phone, cart, total, website, comment } = data;
+    const { name, phone, cart, total, website, comment, addons } = data;
 
     // Honeypot: real users never fill this hidden field. Bots that auto-fill every
     // input do. Fail quietly (same-shaped response) instead of telling bots why.
@@ -200,13 +200,30 @@ export async function onRequestPost(context) {
 
     const trimmedComment = String(comment || "").trim().slice(0, 140);
 
+    // Add-on modifiers (alt milk, extra shot, syrup, own-cup discount) are order-level,
+    // not tied to one cart line — same fixed set the front-end offers, but re-clamped
+    // here since the request body is client-controlled.
+    let addonsText = "";
+    if (Array.isArray(addons) && addons.length) {
+      addonsText = addons
+        .slice(0, 10)
+        .map((a) => {
+          const label = escapeMdV2(String(a.label || "").slice(0, 40));
+          const price = Math.max(-2000, Math.min(5000, parseInt(a.price, 10) || 0));
+          safeTotal += price;
+          return `➕ ${label} (${price > 0 ? "\\+" : "\\-"}${escapeMdV2(String(Math.abs(price)))} ₸)`;
+        })
+        .join("\n") + "\n";
+    }
+
     // Build the Telegram message (MarkdownV2: dynamic fields are escaped,
     // the *bold* markers are placed manually and left un-escaped).
     const message =
       `🎮 *НОВЫЙ ЗАКАЗ \\[SAVE POINT\\]*\n\n` +
       `👤 *Имя:* ${escapeMdV2(trimmedName)}\n` +
       `📞 *Телефон:* ${escapeMdV2(trimmedPhone)}\n\n` +
-      `📦 *Состав заказа:*\n${itemsText}\n\n` +
+      `📦 *Состав заказа:*\n${itemsText}\n` +
+      (addonsText ? `\n${addonsText}` : "\n") +
       (trimmedComment ? `📝 *Комментарий:* ${escapeMdV2(trimmedComment)}\n` : "") +
       `💰 *Итого к оплате:* ${escapeMdV2(String(safeTotal))} ₸\n` +
       `⚡ Статус: Ожидает выставления счёта`;

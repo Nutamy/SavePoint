@@ -1187,17 +1187,51 @@ select.retro-input {
 .menu-add-btn:hover { background: var(--accent-green); color: #000; }
 .menu-add-btn .icon { width: 14px; height: 14px; }
 
-.menu-addons-note {
-    font-size: 12.5px;
-    line-height: 1.6;
-    color: var(--text-dim);
-    background: rgba(255, 204, 0, 0.06);
-    border: 1px dashed var(--accent-yellow);
-    border-radius: 4px;
-    padding: 10px 12px;
-    margin: 16px 0 4px;
+/* ===== Cart add-ons: selectable modifiers (alt milk, extra shot, syrup, own cup) ===== */
+
+.cart-addons {
+    margin: 14px 0;
 }
-.menu-addons-note strong { color: var(--accent-yellow); }
+
+.cart-addons-label {
+    font-size: 12.5px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.addon-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.addon-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    font-weight: 700;
+    background: #1a1a22;
+    border: 2px solid #3a3a45;
+    color: var(--text-dim);
+    padding: 8px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    min-height: 40px;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.addon-chip:hover { border-color: var(--accent-green); color: #fff; }
+.addon-chip[aria-pressed="true"] {
+    border-color: var(--accent-green);
+    background: rgba(0, 255, 102, 0.14);
+    color: #fff;
+}
+.addon-chip-price {
+    color: var(--accent-yellow);
+    font-weight: 700;
+}
 
 /* ===== Privacy policy page ===== */
 
