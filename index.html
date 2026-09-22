@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Save Point | Спешелти-кофейня и место для работы в Алматы</title>
-    <meta name="description" content="Save Point — спешелти-кофейня и coworking-хаб на пр. Гагарина, 127/91 в Алматы. Бронь стола с розеткой за 30 секунд, предзаказ кофе к нужной минуте, печенье с предсказанием, pet-friendly, быстрый Wi-Fi.">
+    <meta name="description" content="Save Point — спешелти-кофейня и coworking-хаб на пр. Гагарина, 127/91 в Алматы. Интерактивная карта зала, бронь стола с розеткой за 30 секунд, предзаказ кофе к нужной минуте, печенье с предсказанием, pet-friendly, быстрый Wi-Fi.">
 
     <!-- TODO: replace with the real site URL after deploy -->
     <link rel="canonical" href="https://savepoint-almaty.pages.dev/">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Save Point — спешелти-кофейня и место для работы в Алматы">
-    <meta property="og:description" content="Бронь стола с розеткой за 30 секунд, предзаказ кофе и печенье с предсказанием. Пр. Гагарина, 127/91, Алматы.">
+    <meta property="og:description" content="Интерактивная карта зала, бронь стола с розеткой за 30 секунд, предзаказ кофе и печенье с предсказанием. Пр. Гагарина, 127/91, Алматы.">
     <meta property="og:image" content="https://savepoint-almaty.pages.dev/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -18,7 +18,7 @@
     <meta property="og:locale" content="ru_RU">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Save Point — спешелти-кофейня и место для работы в Алматы">
-    <meta name="twitter:description" content="Бронь стола с розеткой за 30 секунд, предзаказ кофе и печенье с предсказанием. Пр. Гагарина, 127/91, Алматы.">
+    <meta name="twitter:description" content="Интерактивная карта зала, бронь стола с розеткой за 30 секунд, предзаказ кофе и печенье с предсказанием. Пр. Гагарина, 127/91, Алматы.">
     <meta name="twitter:image" content="https://savepoint-almaty.pages.dev/og-image.png">
 
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -26,10 +26,10 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
 
     <link rel="stylesheet" href="style.css">
-    <!-- Retro pixel font -->
+    <!-- Retro window-chrome font (short UI labels only) + a readable monospace for everything else -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
 
     <script type="application/ld+json">
     {
@@ -57,25 +57,83 @@
       "petsAllowed": true,
       "amenityFeature": [
         { "@type": "LocationFeatureSpecification", "name": "Wi-Fi", "value": true },
-        { "@type": "LocationFeatureSpecification", "name": "Розетка у каждого стола", "value": true },
-        { "@type": "LocationFeatureSpecification", "name": "Онлайн-бронирование столов", "value": true }
+        { "@type": "LocationFeatureSpecification", "name": "Розетка у каждого стола (4 шт. на столик)", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Интерактивная карта зала и онлайн-бронирование столов", "value": true }
       ],
       "hasMenu": {
         "@type": "Menu",
-        "hasMenuItem": [
-          { "@type": "MenuItem", "name": "Фильтр-кофе", "offers": { "@type": "Offer", "price": "1200", "priceCurrency": "KZT" } },
-          { "@type": "MenuItem", "name": "Лавандовый Раф", "offers": { "@type": "Offer", "price": "1800", "priceCurrency": "KZT" } },
-          { "@type": "MenuItem", "name": "Круассан", "offers": { "@type": "Offer", "price": "1400", "priceCurrency": "KZT" } },
-          { "@type": "MenuItem", "name": "Матча Латте на миндальном молоке", "offers": { "@type": "Offer", "price": "1700", "priceCurrency": "KZT" } },
-          { "@type": "MenuItem", "name": "Эспрессо Классик", "offers": { "@type": "Offer", "price": "900", "priceCurrency": "KZT" } },
-          { "@type": "MenuItem", "name": "Капучино Double", "offers": { "@type": "Offer", "price": "1500", "priceCurrency": "KZT" } },
-          { "@type": "MenuItem", "name": "Чизкейк Нью-Йорк", "offers": { "@type": "Offer", "price": "1600", "priceCurrency": "KZT" } }
+        "hasMenuSection": [
+          {
+            "@type": "MenuSection",
+            "name": "Кофе — классика",
+            "hasMenuItem": [
+              { "@type": "MenuItem", "name": "Американо", "offers": { "@type": "Offer", "price": "850", "priceCurrency": "KZT" } },
+              { "@type": "MenuItem", "name": "Капучино", "offers": { "@type": "Offer", "price": "1250", "priceCurrency": "KZT" } },
+              { "@type": "MenuItem", "name": "Латте", "offers": { "@type": "Offer", "price": "1350", "priceCurrency": "KZT" } }
+            ]
+          },
+          {
+            "@type": "MenuSection",
+            "name": "Фирменные напитки",
+            "hasMenuItem": [
+              { "@type": "MenuItem", "name": "Флэт уайт «Тянь-Шань»", "offers": { "@type": "Offer", "price": "1550", "priceCurrency": "KZT" } },
+              { "@type": "MenuItem", "name": "Раф «Апорт»", "offers": { "@type": "Offer", "price": "1650", "priceCurrency": "KZT" } }
+            ]
+          },
+          {
+            "@type": "MenuSection",
+            "name": "Свежая выпечка",
+            "hasMenuItem": [
+              { "@type": "MenuItem", "name": "Круассан классический", "offers": { "@type": "Offer", "price": "800", "priceCurrency": "KZT" } },
+              { "@type": "MenuItem", "name": "Круассан миндальный с франжипаном", "offers": { "@type": "Offer", "price": "1250", "priceCurrency": "KZT" } }
+            ]
+          },
+          {
+            "@type": "MenuSection",
+            "name": "Десерты",
+            "hasMenuItem": [
+              { "@type": "MenuItem", "name": "Чизкейк «Нью-Йорк»", "offers": { "@type": "Offer", "price": "1400", "priceCurrency": "KZT" } }
+            ]
+          }
         ]
       }
     }
     </script>
 </head>
 <body>
+
+    <!-- Inline icon sprite: monochrome, currentColor-based, replaces emoji everywhere on the page
+         so icons stay crisp and on-brand instead of depending on the OS's own emoji font. -->
+    <svg style="display:none" aria-hidden="true">
+        <defs>
+            <symbol id="icon-x-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.8"/><path d="M9 9l6 6M15 9l-6 6" stroke-width="1.8"/></symbol>
+            <symbol id="icon-coffee" viewBox="0 0 24 24"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z" stroke-width="1.6"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17" stroke-width="1.6"/><path d="M8 3.5c0 1-1 1-1 2s1 1 1 2M12 3.5c0 1-1 1-1 2s1 1 1 2" stroke-width="1.3"/></symbol>
+            <symbol id="icon-sofa" viewBox="0 0 24 24"><path d="M5 12V9a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3" stroke-width="1.6"/><path d="M3 12h18v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4z" stroke-width="1.6"/><path d="M3 13v5M21 13v5" stroke-width="1.6"/></symbol>
+            <symbol id="icon-paw" viewBox="0 0 24 24"><circle cx="7" cy="8.5" r="1.7" stroke-width="1.4"/><circle cx="12" cy="6.5" r="1.7" stroke-width="1.4"/><circle cx="17" cy="8.5" r="1.7" stroke-width="1.4"/><path d="M12 11.2c-3 0-5.3 2.1-5.3 4.5 0 1.6 1.3 2.7 2.8 2.3.9-.3 1.7-.3 2.5 0 1.5.5 2.8-.7 2.8-2.3 0-2.4-2.3-4.5-5.3-4.5z" stroke-width="1.4"/></symbol>
+            <symbol id="icon-bolt" viewBox="0 0 24 24"><path d="M13 2 5 14h5l-1 8 8-12h-5l1-8z"/></symbol>
+            <symbol id="icon-flame" viewBox="0 0 24 24"><path d="M12 21c-4 0-6.5-2.6-6.5-6.1 0-2.9 1.7-4.9 3.2-6.8.3 1.5 1.2 2.3 2 1.9.3-2.3-.6-3.9-1-6.1 3 1.4 6.6 4.8 6.6 9 .9-.5 1.3-1.6 1.3-2.7 1.6 1.6 2.1 3.5 2.1 4.8 0 3.3-2.8 5.9-6.9 5.9z"/></symbol>
+            <symbol id="icon-leaf" viewBox="0 0 24 24"><path d="M5 19c0-8 5-13 13-14-1 8-6 13-14 14z" stroke-width="1.6"/><path d="M6 18C11 13 14 10 18 6" stroke-width="1.4"/></symbol>
+            <symbol id="icon-gift" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="1" stroke-width="1.6"/><path d="M4 10h16M12 10v10" stroke-width="1.6"/><path d="M12 10c-2-4-6-4-6-1.5S9 10 12 10zM12 10c2-4 6-4 6-1.5S15 10 12 10z" stroke-width="1.4"/></symbol>
+            <symbol id="icon-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.6 7-11.5A7 7 0 0 0 5 9.5C5 14.4 12 21 12 21z" stroke-width="1.6"/><circle cx="12" cy="9.5" r="2.4" stroke-width="1.4"/></symbol>
+            <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.6"/><path d="M12 7v5l3.5 2" stroke-width="1.6"/></symbol>
+            <symbol id="icon-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z" stroke-width="1.6"/><path d="M9 12l2 2 4-4" stroke-width="1.6"/></symbol>
+            <symbol id="icon-card" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2" stroke-width="1.6"/><path d="M3 10h18" stroke-width="1.6"/><path d="M7 14h4" stroke-width="1.6"/></symbol>
+            <symbol id="icon-car" viewBox="0 0 24 24"><path d="M4 16V12l2-4h12l2 4v4" stroke-width="1.6"/><path d="M3 16h18v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-1H7v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-2z" stroke-width="1.6"/><circle cx="7.5" cy="16" r="1.4" stroke-width="1.3"/><circle cx="16.5" cy="16" r="1.4" stroke-width="1.3"/></symbol>
+            <symbol id="icon-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.8"/><path d="M8 12.5l2.5 2.5L16 9.5" stroke-width="1.8"/></symbol>
+            <symbol id="icon-sparkle" viewBox="0 0 24 24"><path d="M12 3l1.4 4.6L18 9l-4.6 1.4L12 15l-1.4-4.6L6 9l4.6-1.4L12 3z"/><path d="M19 15l.7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7L19 15z"/></symbol>
+            <symbol id="icon-shuffle" viewBox="0 0 24 24"><path d="M20 11A8 8 0 1 0 19 15" stroke-width="1.8"/><path d="M20 5v6h-6" stroke-width="1.8"/></symbol>
+            <symbol id="icon-cookie" viewBox="0 0 24 24"><path d="M3 12c3 6 6 8 9 8s6-2 9-8c-4 1-8 1-9-2-1 3-5 3-9 2z" stroke-width="1.5"/><circle cx="9" cy="14.5" r=".9"/><circle cx="15" cy="14.5" r=".9"/><circle cx="12" cy="17.5" r=".9"/></symbol>
+            <symbol id="icon-croissant" viewBox="0 0 24 24"><path d="M3 15c1-7 7-11 14-10-2 1-3 3-2 5 2-1 4 0 4 2-2 0-3 1-3 3-5 3-10 3-13 0z" stroke-width="1.5"/></symbol>
+            <symbol id="icon-tea" viewBox="0 0 24 24"><path d="M4 10h14l-1 4a6 6 0 0 1-6 5h0a6 6 0 0 1-6-5l-1-4z" stroke-width="1.6"/><path d="M18 11h1.5a2 2 0 0 1 0 4H18" stroke-width="1.4"/><path d="M9 6c0-1 1-1 1-2M13 6c0-1 1-1 1-2" stroke-width="1.3"/></symbol>
+            <symbol id="icon-cake" viewBox="0 0 24 24"><path d="M4 20V12l8-6 8 6v8z" stroke-width="1.6"/><path d="M4 16h16" stroke-width="1.4"/><path d="M12 6V3" stroke-width="1.4"/></symbol>
+            <symbol id="icon-salad" viewBox="0 0 24 24"><path d="M4 12h16a8 8 0 0 1-16 0z" stroke-width="1.6"/><path d="M8 12c0-3 2-5 4-6" stroke-width="1.4"/></symbol>
+            <symbol id="icon-window" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="1" stroke-width="1.6"/><path d="M12 4v16M4 12h16" stroke-width="1.4"/></symbol>
+            <symbol id="icon-users" viewBox="0 0 24 24"><circle cx="9" cy="9" r="3" stroke-width="1.6"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5" stroke-width="1.6"/><circle cx="17" cy="9" r="2.4" stroke-width="1.4"/><path d="M15.5 14.3c2.6.3 4.5 2.3 4.5 5.7" stroke-width="1.4"/></symbol>
+            <symbol id="icon-corner" viewBox="0 0 24 24"><path d="M5 4v16h16" stroke-width="1.8"/><rect x="8" y="14" width="4" height="4" stroke-width="1.4"/></symbol>
+            <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke-width="2"/></symbol>
+            <symbol id="icon-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.6"/><path d="M12 11v5.5" stroke-width="1.8"/><circle cx="12" cy="8" r=".9"/></symbol>
+        </defs>
+    </svg>
 
     <!-- Custom pixel cursor: enabled by JS only on mouse-capable devices -->
     <div class="custom-cursor" aria-hidden="true"></div>
@@ -111,18 +169,18 @@
             <!-- Interactive area: fortune cookie -->
             <div class="game-box">
                 <div class="pixel-canvas">
-                    <div class="cookie-display" id="cookieDisplay" role="button" tabindex="0" aria-label="Кликнуть на печенье, чтобы узнать предсказание">🥠</div>
+                    <svg class="icon cookie-display" id="cookieDisplay" role="button" tabindex="0" aria-label="Кликнуть на печенье, чтобы узнать предсказание"><use href="#icon-cookie"></use></svg>
                     <div class="recipe-status" id="cookieStatus">Кликни на печенье, чтобы узнать предсказание на сегодня!</div>
                 </div>
 
                 <!-- Fortune card (revealed on click) -->
                 <div class="fortune-card hidden" id="fortuneCard">
-                    <p class="fortune-title">✨ Твое предсказание:</p>
+                    <p class="fortune-title"><svg class="icon" aria-hidden="true"><use href="#icon-sparkle"></use></svg> Твое предсказание:</p>
                     <p class="fortune-text" id="fortuneText">«Сегодня идеальный день для чашки фильтр-кофе и великих свершений в Алматы.»</p>
                 </div>
 
                 <div class="controls-panel">
-                    <button class="retro-btn small-btn" id="newFortuneBtn">🔮 Другое предсказание</button>
+                    <button class="retro-btn small-btn" id="newFortuneBtn"><svg class="icon" aria-hidden="true"><use href="#icon-shuffle"></use></svg> Другое предсказание</button>
                 </div>
             </div>
         </section>
@@ -133,19 +191,19 @@
             <p class="section-lead">Едешь в центр, чтобы спокойно поработать или встретиться с друзьями — и попадаешь в привычный квест алматинских кофеен:</p>
             <div class="grid-2">
                 <div class="card problem-card">
-                    <h3>❌ Полная посадка в пик</h3>
+                    <h3><svg class="icon" aria-hidden="true"><use href="#icon-x-circle"></use></svg> Полная посадка в пик</h3>
                     <p>20 минут в дороге, а потом круги по залу в поисках хоть одного свободного стула.</p>
                 </div>
                 <div class="card problem-card">
-                    <h3>❌ Охота за розеткой</h3>
+                    <h3><svg class="icon" aria-hidden="true"><use href="#icon-x-circle"></use></svg> Охота за розеткой</h3>
                     <p>Свободное место есть, доступа к питанию нет — ноутбук гаснет через 10 минут.</p>
                 </div>
                 <div class="card problem-card">
-                    <h3>❌ «С ноутбуком нельзя»</h3>
+                    <h3><svg class="icon" aria-hidden="true"><use href="#icon-x-circle"></use></svg> «С ноутбуком нельзя»</h3>
                     <p>Косые взгляды персонала, если задержался дольше часа с работой.</p>
                 </div>
                 <div class="card problem-card">
-                    <h3>❌ Хаос с бронью</h3>
+                    <h3><svg class="icon" aria-hidden="true"><use href="#icon-x-circle"></use></svg> Хаос с бронью</h3>
                     <p>Долгая переписка в WhatsApp без гарантии, что стол правда твой.</p>
                 </div>
             </div>
@@ -169,8 +227,8 @@
                             <td>Заранее видишь загрузку и сам выбираешь стол: у окна, в тихом углу или в зоне для встреч.</td>
                         </tr>
                         <tr>
-                            <td>Фильтр «Стол с розеткой»</td>
-                            <td>Гарантия, что гаджеты заряжены — доступ к питанию есть у каждого рабочего места.</td>
+                            <td>Розетка на каждом столе</td>
+                            <td>4 розетки у любого столика — гарантия, что гаджеты заряжены, кем бы ты ни пришёл.</td>
                         </tr>
                         <tr>
                             <td>Высокоскоростной Wi-Fi</td>
@@ -197,15 +255,15 @@
             <h2 class="section-title">// АТМОСФЕРА И ЦЕННОСТИ</h2>
             <div class="grid-3">
                 <div class="card">
-                    <h3>☕ Свежая обжарка</h3>
+                    <h3><svg class="icon" aria-hidden="true"><use href="#icon-coffee"></use></svg> Свежая обжарка</h3>
                     <p>Используем только отборное зерно спешелти качества, обжаренное специально для наших гостей в Алматы.</p>
                 </div>
                 <div class="card">
-                    <h3>🛋 Уютный интерьер</h3>
+                    <h3><svg class="icon" aria-hidden="true"><use href="#icon-sofa"></use></svg> Уютный интерьер</h3>
                     <p>Атмосфера ламповых видеоигр 90-х: мягкие диваны, тёплый свет и фоновый саундтрек, под который приятно залипать над ноутбуком или книгой.</p>
                 </div>
                 <div class="card">
-                    <h3>🐾 Pet-friendly</h3>
+                    <h3><svg class="icon" aria-hidden="true"><use href="#icon-paw"></use></svg> Pet-friendly</h3>
                     <p>Мы любим животных! Приходите со своими питомцами — для них всегда найдется миска со свежей водой.</p>
                 </div>
             </div>
@@ -216,42 +274,42 @@
             <h2 class="section-title">// ХИТЫ ПРОДАЖ</h2>
             <div class="grid-4">
                 <div class="card product-card">
-                    <span class="menu-badge badge-nomad">⚡ Выбор digital-кочевников</span>
-                    <div class="product-icon" aria-hidden="true">☕</div>
-                    <h3>Фильтр-кофе</h3>
-                    <p class="product-desc">Классика чистейшего вкуса свежего зерна.</p>
+                    <span class="menu-badge badge-nomad"><svg class="icon" aria-hidden="true"><use href="#icon-bolt"></use></svg> Выбор digital-кочевников</span>
+                    <svg class="icon product-icon" aria-hidden="true"><use href="#icon-coffee"></use></svg>
+                    <h3>V60 (зерно недели)</h3>
+                    <p class="product-desc">Фильтр-кофе ручной проливной, раскрывает вкус зерна недели.</p>
                     <div class="product-footer">
-                        <span class="price">1200 ₸</span>
-                        <button class="retro-btn small-btn add-to-cart" data-name="Фильтр-кофе" data-price="1200">+ В заказ</button>
+                        <span class="price">1100 ₸</span>
+                        <button class="retro-btn small-btn add-to-cart" data-name="V60 (зерно недели)" data-price="1100">+ В заказ</button>
                     </div>
                 </div>
                 <div class="card product-card">
-                    <span class="menu-badge badge-hit">🔥 Хит продаж</span>
-                    <div class="product-icon" aria-hidden="true">🥛</div>
-                    <h3>Лавандовый Раф</h3>
-                    <p class="product-desc">Фирменный мягкий напиток с натуральным лавандовым сиропом.</p>
+                    <span class="menu-badge badge-hit"><svg class="icon" aria-hidden="true"><use href="#icon-flame"></use></svg> Хит продаж</span>
+                    <svg class="icon product-icon" aria-hidden="true"><use href="#icon-coffee"></use></svg>
+                    <h3>Флэт уайт «Тянь-Шань»</h3>
+                    <p class="product-desc">Фирменный флэт уайт с сиропом из грецкого ореха.</p>
                     <div class="product-footer">
-                        <span class="price">1800 ₸</span>
-                        <button class="retro-btn small-btn add-to-cart" data-name="Лавандовый Раф" data-price="1800">+ В заказ</button>
+                        <span class="price">1550 ₸</span>
+                        <button class="retro-btn small-btn add-to-cart" data-name="Флэт уайт «Тянь-Шань»" data-price="1550">+ В заказ</button>
                     </div>
                 </div>
                 <div class="card product-card">
-                    <div class="product-icon" aria-hidden="true">🥐</div>
-                    <h3>Круассан</h3>
-                    <p class="product-desc">Свежая хрустящая выпечка с миндальным кремом.</p>
+                    <svg class="icon product-icon" aria-hidden="true"><use href="#icon-croissant"></use></svg>
+                    <h3>Круассан миндальный</h3>
+                    <p class="product-desc">Свежая хрустящая выпечка с миндальным франжипаном.</p>
                     <div class="product-footer">
-                        <span class="price">1400 ₸</span>
-                        <button class="retro-btn small-btn add-to-cart" data-name="Круассан" data-price="1400">+ В заказ</button>
+                        <span class="price">1250 ₸</span>
+                        <button class="retro-btn small-btn add-to-cart" data-name="Круассан миндальный с франжипаном" data-price="1250">+ В заказ</button>
                     </div>
                 </div>
                 <div class="card product-card">
-                    <span class="menu-badge badge-trend">🌿 Тренд сезона</span>
-                    <div class="product-icon" aria-hidden="true">🍵</div>
-                    <h3>Матча Латте</h3>
-                    <p class="product-desc">Японская матча на миндальном молоке — мягкий вкус без горечи.</p>
+                    <span class="menu-badge badge-trend"><svg class="icon" aria-hidden="true"><use href="#icon-leaf"></use></svg> Тренд сезона</span>
+                    <svg class="icon product-icon" aria-hidden="true"><use href="#icon-tea"></use></svg>
+                    <h3>Матча-латте</h3>
+                    <p class="product-desc">Японская матча на молоке на выбор — мягкий вкус без горечи.</p>
                     <div class="product-footer">
-                        <span class="price">1700 ₸</span>
-                        <button class="retro-btn small-btn add-to-cart" data-name="Матча Латте на миндальном молоке" data-price="1700">+ В заказ</button>
+                        <span class="price">1600 ₸</span>
+                        <button class="retro-btn small-btn add-to-cart" data-name="Матча-латте" data-price="1600">+ В заказ</button>
                     </div>
                 </div>
             </div>
@@ -262,7 +320,7 @@
             <h2 class="section-title">// ГОТОВОЕ РЕШЕНИЕ, НОЛЬ ПОТЕРЯННОГО ВРЕМЕНИ</h2>
             <p class="section-lead">В Save Point получаешь не просто спешелти-напиток на классическом или альтернативном молоке, а гарантированное личное пространство под свои задачи.</p>
             <div class="fortune-card offer-bonus">
-                <p class="fortune-title">🎁 Welcome-бонус:</p>
+                <p class="fortune-title"><svg class="icon" aria-hidden="true"><use href="#icon-gift"></use></svg> Welcome-бонус:</p>
                 <p class="fortune-text">Забронируй стол или оформи предзаказ прямо сейчас — и получи промокод на −20% на первый авторский напиток или воронку V60: <span class="promo-code">SAVEPOINT20</span></p>
             </div>
             <div class="controls-panel">
@@ -299,36 +357,36 @@
             </div>
 
             <h3 class="faq-heading">// ГАРАНТИИ И ЧАСТЫЕ ВОПРОСЫ</h3>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <button class="faq-question" id="faqQ1" aria-expanded="false" aria-controls="faqA1">
-                        <span>🛡️ Гарантия сохранения брони</span>
-                        <span class="faq-icon" aria-hidden="true">+</span>
+            <div class="accordion-list" id="faqAccordion">
+                <div class="accordion-item">
+                    <button class="accordion-trigger" id="faqQ1" aria-expanded="false" aria-controls="faqA1">
+                        <span class="accordion-trigger-label"><svg class="icon" aria-hidden="true"><use href="#icon-shield"></use></svg> Гарантия сохранения брони</span>
+                        <span class="accordion-icon" aria-hidden="true">+</span>
                     </button>
-                    <div class="faq-answer-wrap" id="faqA1" role="region" aria-labelledby="faqQ1">
-                        <div class="faq-answer-inner">
+                    <div class="accordion-panel-wrap" id="faqA1" role="region" aria-labelledby="faqQ1">
+                        <div class="accordion-panel-inner">
                             <p>Стол ждёт тебя 15 минут от указанного времени. Планы изменились — отмени или перенеси бронь в один клик через Telegram-бот кофейни.</p>
                         </div>
                     </div>
                 </div>
-                <div class="faq-item">
-                    <button class="faq-question" id="faqQ2" aria-expanded="false" aria-controls="faqA2">
-                        <span>💳 Удобная оплата</span>
-                        <span class="faq-icon" aria-hidden="true">+</span>
+                <div class="accordion-item">
+                    <button class="accordion-trigger" id="faqQ2" aria-expanded="false" aria-controls="faqA2">
+                        <span class="accordion-trigger-label"><svg class="icon" aria-hidden="true"><use href="#icon-card"></use></svg> Удобная оплата</span>
+                        <span class="accordion-icon" aria-hidden="true">+</span>
                     </button>
-                    <div class="faq-answer-wrap" id="faqA2" role="region" aria-labelledby="faqQ2">
-                        <div class="faq-answer-inner">
+                    <div class="accordion-panel-wrap" id="faqA2" role="region" aria-labelledby="faqQ2">
+                        <div class="accordion-panel-inner">
                             <p>Kaspi QR, Apple Pay, Google Pay или оплата на месте. Никаких скрытых комиссий.</p>
                         </div>
                     </div>
                 </div>
-                <div class="faq-item">
-                    <button class="faq-question" id="faqQ3" aria-expanded="false" aria-controls="faqA3">
-                        <span>🚗 Парковка</span>
-                        <span class="faq-icon" aria-hidden="true">+</span>
+                <div class="accordion-item">
+                    <button class="accordion-trigger" id="faqQ3" aria-expanded="false" aria-controls="faqA3">
+                        <span class="accordion-trigger-label"><svg class="icon" aria-hidden="true"><use href="#icon-car"></use></svg> Парковка</span>
+                        <span class="accordion-icon" aria-hidden="true">+</span>
                     </button>
-                    <div class="faq-answer-wrap" id="faqA3" role="region" aria-labelledby="faqQ3">
-                        <div class="faq-answer-inner">
+                    <div class="accordion-panel-wrap" id="faqA3" role="region" aria-labelledby="faqQ3">
+                        <div class="accordion-panel-inner">
                             <p>Удобный подъезд и парковочные места рядом с кофейней.</p>
                         </div>
                     </div>
@@ -360,13 +418,13 @@
 
         <!-- Section: Contacts and map -->
         <section class="section reveal" id="contacts">
-            <h2 class="section-title">// КОНТАКТЫ & КАРТА</h2>
+            <h2 class="section-title">// КОНТАКТЫ &amp; КАРТА</h2>
             <div class="contacts-grid">
                 <div class="card">
-                    <h3>📍 Адрес в Алматы</h3>
+                    <h3><svg class="icon" aria-hidden="true"><use href="#icon-pin"></use></svg> Адрес в Алматы</h3>
                     <p>проспект Гагарина, 127/91</p>
                     <br>
-                    <h3>🕒 Режим работы</h3>
+                    <h3><svg class="icon" aria-hidden="true"><use href="#icon-clock"></use></svg> Режим работы</h3>
                     <p>Пн-Пт: 08:00 – 22:00</p>
                     <p>Сб-Вс: 09:00 – 23:00</p>
                 </div>
@@ -380,7 +438,7 @@
                             referrerpolicy="no-referrer-when-downgrade"
                         ></iframe>
                     </div>
-                    <a class="retro-btn small-btn map-link" href="https://2gis.kz/almaty/geo/9430047374981033" target="_blank" rel="noopener">📍 Открыть в 2GIS</a>
+                    <a class="retro-btn small-btn map-link" href="https://2gis.kz/almaty/geo/9430047374981033" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-pin"></use></svg> Открыть в 2GIS</a>
                 </div>
             </div>
         </section>
@@ -399,9 +457,11 @@
                 <button class="close-modal" id="closeModalBtn" aria-label="Закрыть меню">[X]</button>
             </div>
             <div class="modal-body">
-                <div class="menu-items-list" id="modalItemsList">
-                    <!-- Populated by JS -->
+                <p class="menu-intro">Открой категорию, чтобы посмотреть позиции — жми <svg class="icon" aria-hidden="true"><use href="#icon-plus"></use></svg>, чтобы добавить в заказ.</p>
+                <div class="accordion-list" id="menuCategories">
+                    <!-- Populated by JS from MENU_CATEGORIES -->
                 </div>
+                <p class="menu-addons-note"><strong>Дополнительно:</strong> альтернативное молоко (овсяное, миндальное) +300 ₸ · доп. шот +300 ₸ · сироп +200 ₸ · скидка −100 ₸ за свою кружку — укажи в комментарии к заказу.</p>
 
                 <div class="cart-summary">
                     <h3>Корзина заказа:</h3>
@@ -414,6 +474,8 @@
                         <input type="text" id="clientName" placeholder="например, Айсулу" class="retro-input" maxlength="80" autocomplete="name">
                         <label class="form-prompt" for="clientPhone">Номер телефона:</label>
                         <input type="tel" id="clientPhone" placeholder="+7 (777) 000-00-00" class="retro-input" maxlength="20" autocomplete="tel">
+                        <label class="form-prompt" for="clientComment">Комментарий к заказу (опционально):</label>
+                        <input type="text" id="clientComment" placeholder="например: овсяное молоко, своя кружка" class="retro-input" maxlength="140">
 
                         <!-- Honeypot: hidden from humans, but bots that auto-fill every field will fill it in -->
                         <div class="hp-field" aria-hidden="true">
@@ -449,6 +511,83 @@
             <div class="modal-body">
                 <p class="booking-intro">Забронируй стол с розеткой — подтверждение придёт в Telegram-бот кофейни. Первый авторский напиток по брони — со скидкой <span class="promo-code">-20%</span> (промокод SAVEPOINT20 активируется автоматически).</p>
 
+                <!-- Interactive hall map: front-end simulation (no real seat-sensor/POS backend),
+                     the same way the occupancy indicator above is simulated — statuses are
+                     randomized on a timer, not read from a live booking system. -->
+                <div class="hall-map" id="hallMap">
+                    <h3 class="hall-map-title">Карта зала — выбери стол</h3>
+                    <p class="hall-map-hint"><svg class="icon" aria-hidden="true"><use href="#icon-info"></use></svg> Занятость обновляется в реальном времени. У каждого столика — 4 розетки.</p>
+
+                    <div class="hall-zones">
+                        <div class="hall-zone" data-zone-name="window">
+                            <div class="hall-zone-label"><svg class="icon" aria-hidden="true"><use href="#icon-window"></use></svg> У окна <em>· столы на 3</em></div>
+                            <div class="hall-zone-tables">
+                                <button type="button" class="hall-table hall-table--round hall-table--md" data-table="T4" aria-pressed="false">
+                                    <span class="hall-table-status" aria-hidden="true"></span>
+                                    <span class="hall-table-code">T4</span>
+                                    <span class="hall-table-seats">3 места</span>
+                                </button>
+                                <button type="button" class="hall-table hall-table--round hall-table--md" data-table="T5" aria-pressed="false">
+                                    <span class="hall-table-status" aria-hidden="true"></span>
+                                    <span class="hall-table-code">T5</span>
+                                    <span class="hall-table-seats">3 места</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="hall-zone" data-zone-name="center">
+                            <div class="hall-zone-label"><svg class="icon" aria-hidden="true"><use href="#icon-users"></use></svg> Зона для встреч <em>· столы на 4</em></div>
+                            <div class="hall-zone-tables">
+                                <button type="button" class="hall-table hall-table--round hall-table--lg" data-table="T1" aria-pressed="false">
+                                    <span class="hall-table-status" aria-hidden="true"></span>
+                                    <span class="hall-table-code">T1</span>
+                                    <span class="hall-table-seats">4 места</span>
+                                </button>
+                                <button type="button" class="hall-table hall-table--round hall-table--lg" data-table="T2" aria-pressed="false">
+                                    <span class="hall-table-status" aria-hidden="true"></span>
+                                    <span class="hall-table-code">T2</span>
+                                    <span class="hall-table-seats">4 места</span>
+                                </button>
+                                <button type="button" class="hall-table hall-table--round hall-table--lg" data-table="T3" aria-pressed="false">
+                                    <span class="hall-table-status" aria-hidden="true"></span>
+                                    <span class="hall-table-code">T3</span>
+                                    <span class="hall-table-seats">4 места</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="hall-zone" data-zone-name="wall">
+                            <div class="hall-zone-label"><svg class="icon" aria-hidden="true"><use href="#icon-corner"></use></svg> Тихий угол <em>· столы на 1</em></div>
+                            <div class="hall-zone-tables">
+                                <button type="button" class="hall-table hall-table--sm" data-table="T6" aria-pressed="false">
+                                    <span class="hall-table-status" aria-hidden="true"></span>
+                                    <span class="hall-table-code">T6</span>
+                                    <span class="hall-table-seats">1 место</span>
+                                </button>
+                                <button type="button" class="hall-table hall-table--sm" data-table="T7" aria-pressed="false">
+                                    <span class="hall-table-status" aria-hidden="true"></span>
+                                    <span class="hall-table-code">T7</span>
+                                    <span class="hall-table-seats">1 место</span>
+                                </button>
+                                <button type="button" class="hall-table hall-table--sm" data-table="T8" aria-pressed="false">
+                                    <span class="hall-table-status" aria-hidden="true"></span>
+                                    <span class="hall-table-code">T8</span>
+                                    <span class="hall-table-seats">1 место</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hall-map-legend">
+                        <span class="legend-item"><span class="legend-dot is-free" aria-hidden="true"></span>Свободен</span>
+                        <span class="legend-item"><span class="legend-dot is-soon" aria-hidden="true"></span>Скоро освободится</span>
+                        <span class="legend-item"><span class="legend-dot is-busy" aria-hidden="true"></span>Занят</span>
+                    </div>
+
+                    <p class="hall-map-selection" id="hallMapSelection" aria-live="polite">Выберите стол на карте выше.</p>
+                    <p class="hall-map-group-note hidden" id="hallMapGroupNote">Для компании от 5 человек стол подбираем индивидуально — оформи заявку, мы уточним зону в Telegram.</p>
+                </div>
+
                 <label class="form-prompt" for="bookingDate">Дата:</label>
                 <input type="date" id="bookingDate" class="retro-input" autocomplete="off">
 
@@ -461,10 +600,12 @@
                 <label class="form-prompt" for="bookingDrink">Предзаказ напитка (опционально):</label>
                 <select id="bookingDrink" class="retro-input">
                     <option value="">Без предзаказа</option>
-                    <option value="Фильтр-кофе">Фильтр-кофе</option>
-                    <option value="Лавандовый Раф">Лавандовый Раф</option>
-                    <option value="Матча Латте на миндальном молоке">Матча Латте на миндальном молоке</option>
-                    <option value="Капучино Double">Капучино Double</option>
+                    <option value="Американо">Американо</option>
+                    <option value="Капучино">Капучино</option>
+                    <option value="Латте">Латте</option>
+                    <option value="Раф «Апорт»">Раф «Апорт»</option>
+                    <option value="Матча-латте">Матча-латте</option>
+                    <option value="V60 (зерно недели)">V60 (зерно недели)</option>
                 </select>
 
                 <label class="form-prompt" for="bookingNote">Комментарий (например, «ивент на 10 человек»):</label>
@@ -501,7 +642,7 @@
                 <span>TRANSACTION_STATUS.LOG</span>
             </div>
             <div class="modal-body text-center">
-                <div class="success-icon" aria-hidden="true">✔️</div>
+                <svg class="icon success-icon" aria-hidden="true"><use href="#icon-check-circle"></use></svg>
                 <h3 id="successModalTitle">ЗАКАЗ СФОРМИРОВАН!</h3>
                 <p class="alert-desc" id="successMessageText">Данные переданы в Telegram-бот кофейни.</p>
                 <p class="payment-instruction" id="successInstructionText">На указанный номер будет выставлен счёт. После успешной оплаты вам придет <b>номер заказа</b>, и бариста сразу приступит к приготовлению!</p>

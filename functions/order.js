@@ -49,7 +49,7 @@ async function sendTelegramMessage(env, message) {
 
 async function handleBooking(context, data) {
   const { request, env } = context;
-  const { date, time, guests, drink, note, name, phone, website } = data;
+  const { date, time, guests, drink, note, name, phone, website, table, tableZone, tableSeats } = data;
 
   if (website) {
     return new Response(JSON.stringify({ success: false, error: "Invalid data" }), {
@@ -91,6 +91,12 @@ async function handleBooking(context, data) {
 
   const trimmedDrink = String(drink || "").trim().slice(0, 60);
   const trimmedNote = String(note || "").trim().slice(0, 140);
+  const trimmedTable = String(table || "").trim().slice(0, 10);
+  const trimmedTableZone = String(tableZone || "").trim().slice(0, 40);
+  const seatsNum = parseInt(tableSeats, 10);
+  const tableLine = trimmedTable
+    ? `🪑 *Стол:* ${escapeMdV2(trimmedTable)}${trimmedTableZone ? ` (${escapeMdV2(trimmedTableZone)}${Number.isFinite(seatsNum) && seatsNum > 0 ? ", " + escapeMdV2(String(seatsNum)) + " мест" : ""})` : ""}\n`
+    : "";
 
   const message =
     `📅 *НОВАЯ БРОНЬ СТОЛА \\[SAVE POINT\\]*\n\n` +
@@ -99,6 +105,7 @@ async function handleBooking(context, data) {
     `🗓 *Дата:* ${escapeMdV2(date)}\n` +
     `⏰ *Время:* ${escapeMdV2(time)}\n` +
     `👥 *Гостей:* ${escapeMdV2(String(guestsNum))}\n` +
+    tableLine +
     `☕ *Предзаказ:* ${trimmedDrink ? escapeMdV2(trimmedDrink) : "нет"}\n` +
     (trimmedNote ? `📝 *Комментарий:* ${escapeMdV2(trimmedNote)}\n` : "") +
     `🎁 *Промокод:* SAVEPOINT20 \\(\\-20% на первый напиток\\)\n` +
@@ -127,7 +134,7 @@ export async function onRequestPost(context) {
       return handleBooking(context, data);
     }
 
-    const { name, phone, cart, total, website } = data;
+    const { name, phone, cart, total, website, comment } = data;
 
     // Honeypot: real users never fill this hidden field. Bots that auto-fill every
     // input do. Fail quietly (same-shaped response) instead of telling bots why.
@@ -191,6 +198,8 @@ export async function onRequestPost(context) {
       })
       .join("\n");
 
+    const trimmedComment = String(comment || "").trim().slice(0, 140);
+
     // Build the Telegram message (MarkdownV2: dynamic fields are escaped,
     // the *bold* markers are placed manually and left un-escaped).
     const message =
@@ -198,6 +207,7 @@ export async function onRequestPost(context) {
       `👤 *Имя:* ${escapeMdV2(trimmedName)}\n` +
       `📞 *Телефон:* ${escapeMdV2(trimmedPhone)}\n\n` +
       `📦 *Состав заказа:*\n${itemsText}\n\n` +
+      (trimmedComment ? `📝 *Комментарий:* ${escapeMdV2(trimmedComment)}\n` : "") +
       `💰 *Итого к оплате:* ${escapeMdV2(String(safeTotal))} ₸\n` +
       `⚡ Статус: Ожидает выставления счёта`;
 
